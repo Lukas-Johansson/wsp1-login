@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const db = require('../utils/database');
 const promisePool = db.promise();
 
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index.njk',
@@ -15,8 +14,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', async function (req, res, next) {
-    res.render('login.njk',
-        {
+    res.render('login.njk', {
             title: 'Login'
         });
 });
@@ -38,7 +36,6 @@ router.post('/login', async function (req, res, next) {
             if (result === true) {
                 req.session.user = user[0]  //Ifall det går att logga in, spara användarens data i sessions variabeln 'user'
                 return res.redirect('/profile')
-
             }
             else {
                 return res.send('Invalid username or password')
