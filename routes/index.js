@@ -70,7 +70,6 @@ router.post('/logout', async function (req, res, next) {
 
 router.get('/register', async function (req, res, next) {
     res.render('register.njk')
-
 })
 
 router.post('/register', async function (req, res, next) {
@@ -89,7 +88,6 @@ router.post('/register', async function (req, res, next) {
     }
 
     if (password == passwordConfirmation) {
-
         bcrypt.hash(password, 10, async function (err, hash) {
             console.log(hash)
             const [rows] = await promisePool.query("SELECT * FROM efusers WHERE name = ?", [username])
@@ -102,9 +100,7 @@ router.post('/register', async function (req, res, next) {
             else {
                 return res.send('Username is already taken')
             }
-            //const [rows] = await promisePool.query("INSERT INTO efusers (name, password) VALUES (?, ?)", [username, hash])
         });
-
     }
     else {
         return res.send('Passwords do not match')
@@ -114,13 +110,10 @@ router.post('/register', async function (req, res, next) {
 router.get('/crypt/:password', async function (req, res, next) {
     console.log(req.params)
     const password = req.params.password
-
     bcrypt.hash(password, 10, function (err, hash) {
         console.log(hash)
         return res.json({ hash });
-
     });
-
 })
 
 module.exports = router;
